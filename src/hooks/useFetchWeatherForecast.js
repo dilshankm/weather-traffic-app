@@ -5,6 +5,7 @@ import { setDateTime } from '../helpers';
 const useFetchWeatherForecast = (date, time) => {
     const [weatherForecast, setWeatherForecast] = useState();
     const [loading, setLoading] = useState(false);
+    const [errorW, setErrorW] = useState(null);
 
     useEffect(() => {
         (async () => {
@@ -16,13 +17,13 @@ const useFetchWeatherForecast = (date, time) => {
                 setWeatherForecast(data);
                 setLoading(false);
             } catch (error) {
+                setErrorW(error.message);
                 setLoading(false);
-                // error alerting if needed.
             }
         })();
     }, [date, time]);
 
-    return { weatherForecast, loadingWeatherForecast: loading };
+    return { weatherForecast, loadingWeatherForecast: loading, errorW };
 };
 
 export default useFetchWeatherForecast;

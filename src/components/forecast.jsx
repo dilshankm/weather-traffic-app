@@ -3,7 +3,6 @@ import { Item } from "./styled";
 import Typography from "@mui/material/Typography";
 
 const Forecast = ({ weatherForecast, currentLocation, selectedLocation }) => {
-  console.log(weatherForecast);
 
   const getForeCaset = () =>
     weatherForecast?.items?.[0]?.forecasts?.filter(

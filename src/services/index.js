@@ -1,10 +1,8 @@
 import axios from "axios";
 
 export const getTraficImages = async (dateTime) => {
-  console.log('Hello')
   const url = `https://api.data.gov.sg/v1/transport/traffic-images?date_time=${dateTime}`;
   const results = await axios.get(url);
-  console.log(results)
   return results.data;
 };
 

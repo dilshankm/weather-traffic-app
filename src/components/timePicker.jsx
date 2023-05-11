@@ -26,7 +26,6 @@ const TimePickerComponent = ({ onTimeChange }) => {
       }}
       sx={{ width: 250 }}
       onChange={handleChange}
-      disableFuture
     />
     </LocalizationProvider>
   );

@@ -6,30 +6,27 @@ const useFetchTraficImages = (date, time) => {
 
   const [traficImages, setTraficImages] = useState();
   const [loading, setLoading] = useState(false);
+  const [errorT, setErrorT] = useState(null);
 
   useEffect(() => {
     (async () => {
       if (!date || !time) return;
       setLoading(true);
       try {
-        console.log(date)
-        console.log(time)
         const dateTime = setDateTime(date, time).format(
           "YYYY-MM-DD[T]HH:mm:ss"
         );
-        console.log('Be')
-        console.log(dateTime);
         const data = await getTraficImages(dateTime);
         setTraficImages(data);
         setLoading(false);
       } catch (error) {
+        setErrorT(error.message);
         setLoading(false);
-        console.log(error)
       }
     })();
   }, [date, time]);
 
-  return { traficImages, loadingTraficImages: loading };
+  return { traficImages, loadingTraficImages: loading ,errorT};
 };
 
 export default useFetchTraficImages;
