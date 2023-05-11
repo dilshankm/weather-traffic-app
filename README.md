@@ -1,4 +1,4 @@
-# React App with Docker and Nginx
+# Weather Traffic App
 
 This project is a sample application developed consuming singapore goverment external apis for viewing traffic images and weather forecast for a particular day and time and selecting a location.
 
