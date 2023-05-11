@@ -3,7 +3,6 @@ import { getTraficImages } from "../services";
 import { setDateTime } from "../helpers";
 
 const useFetchTraficImages = (date, time) => {
-
   const [traficImages, setTraficImages] = useState();
   const [loading, setLoading] = useState(false);
   const [errorT, setErrorT] = useState(null);
@@ -26,7 +25,7 @@ const useFetchTraficImages = (date, time) => {
     })();
   }, [date, time]);
 
-  return { traficImages, loadingTraficImages: loading ,errorT};
+  return { traficImages, loadingTraficImages: loading, errorT };
 };
 
 export default useFetchTraficImages;

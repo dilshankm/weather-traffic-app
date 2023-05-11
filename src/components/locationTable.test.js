@@ -5,18 +5,21 @@ import Search from "./locationSearch";
 import React from "react";
 import weather from "../mock-data/weatherForecast.json";
 import traffic from "../mock-data/trafficImages.json";
-import '@testing-library/jest-dom';
+import "@testing-library/jest-dom";
 
 jest.mock("../helpers", () => ({
   getNearestLocation: jest.fn(),
 }));
 
 jest.mock("./locationSearch", () => (props) => (
-    <div data-testid="mock-search">
-      <button onClick={() => props.onSelect({ target: { outerText: "testLocation" }})}>Select location</button>
-    </div>
-  ));
-  
+  <div data-testid="mock-search">
+    <button
+      onClick={() => props.onSelect({ target: { outerText: "testLocation" } })}
+    >
+      Select location
+    </button>
+  </div>
+));
 
 describe("LocationTable component", () => {
   it("renders without crashing", () => {
@@ -38,12 +41,13 @@ describe("LocationTable component", () => {
       onSelect: onSelectMock,
       disableClose: true,
     };
-    
+
     render(<LocationTable {...props} />);
     fireEvent.click(screen.getByText(/select location/i));
-    expect(onSelectMock).toHaveBeenCalledWith(expect.objectContaining({ target: { outerText: 'testLocation' }}));
+    expect(onSelectMock).toHaveBeenCalledWith(
+      expect.objectContaining({ target: { outerText: "testLocation" } })
+    );
   });
-  
 
   it.skip("returns traffic location", () => {
     const props = {
@@ -58,9 +62,7 @@ describe("LocationTable component", () => {
       traficImages: {
         items: [
           {
-            cameras: [
-              { location: { latitude: "1.1", longitude: "1.1" } },
-            ],
+            cameras: [{ location: { latitude: "1.1", longitude: "1.1" } }],
           },
         ],
       },

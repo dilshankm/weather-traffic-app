@@ -2,7 +2,7 @@ import { renderHook } from "@testing-library/react";
 import { getWeatherForecast } from "../services";
 import { useFetchWeatherForecast } from ".";
 import { wait } from "@testing-library/user-event/dist/utils";
-import weather from '../mock-data/weatherForecast.json'
+import weather from "../mock-data/weatherForecast.json";
 
 jest.mock("../services");
 

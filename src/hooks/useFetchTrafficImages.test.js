@@ -1,8 +1,8 @@
 import { renderHook } from "@testing-library/react";
 import { getTraficImages } from "../services";
-import { useFetchTraficImages } from "."
+import { useFetchTraficImages } from ".";
 import { wait } from "@testing-library/user-event/dist/utils";
-import traffic from "../mock-data/trafficImages.json"
+import traffic from "../mock-data/trafficImages.json";
 
 jest.mock("../services");
 

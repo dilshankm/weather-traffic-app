@@ -1,5 +1,5 @@
-import '../__mocks__/matchMedia.mock';
-import React from 'react';
+import "../__mocks__/matchMedia.mock";
+import React from "react";
 import { render } from "@testing-library/react";
 import Main from ".";
 

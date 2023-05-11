@@ -3,10 +3,14 @@ import Filters from "./filters";
 import DatePicker from "./datePicker";
 import TimePickerComponent from "./timePicker";
 
-jest.mock('./DatePicker', () => (props) => <div data-testid="datepicker">{props.children}</div>);
-jest.mock('./TimePicker', () => (props) => <div data-testid="timepicker">{props.children}</div>);
+jest.mock("./DatePicker", () => (props) => (
+  <div data-testid="datepicker">{props.children}</div>
+));
+jest.mock("./TimePicker", () => (props) => (
+  <div data-testid="timepicker">{props.children}</div>
+));
 
-describe('Filters Component', () => {
+describe("Filters Component", () => {
   it.skip("renders without crashing", () => {
     render(<Filters />);
   });
@@ -21,12 +25,14 @@ describe('Filters Component', () => {
   it.skip("onDateChange and onTimeChange callbacks are called", () => {
     const onDateChange = jest.fn();
     const onTimeChange = jest.fn();
-    
+
     const { getByTestId } = render(
       <Filters onDateChange={onDateChange} onTimeChange={onTimeChange} />
     );
-    
-    fireEvent.change(getByTestId("datepicker"), { target: { value: "2023-05-10" } });
+
+    fireEvent.change(getByTestId("datepicker"), {
+      target: { value: "2023-05-10" },
+    });
     expect(onDateChange).toHaveBeenCalled();
 
     fireEvent.change(getByTestId("timepicker"), { target: { value: "12:00" } });

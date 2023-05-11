@@ -42,7 +42,4 @@ export const getNearestLocation = (latitude, longitude, locations) => {
 export const setDateTime = (date, time) =>
   date &&
   time &&
-  dayjs(date)
-  .set("hour", time.$H)
-  .set("minute", time.$m)
-  .set("second", "00");
+  dayjs(date).set("hour", time.$H).set("minute", time.$m).set("second", "00");

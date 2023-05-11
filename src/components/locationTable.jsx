@@ -2,7 +2,12 @@ import * as React from "react";
 import { getNearestLocation } from "../helpers";
 import Search from "./locationSearch";
 
-const LocationTable = ({ weatherForecast, traficImages, onSelect,  disableClose}) => {
+const LocationTable = ({
+  weatherForecast,
+  traficImages,
+  onSelect,
+  disableClose,
+}) => {
   const getTraficLocation = (lat, long) => {
     const location = weatherForecast?.area_metadata?.map((item) => ({
       name: item?.name,
@@ -46,7 +51,7 @@ const LocationTable = ({ weatherForecast, traficImages, onSelect,  disableClose}
             event.target.outerText
           )
         }
-        disableClose = { disableClose }
+        disableClose={disableClose}
       />
     </>
   );

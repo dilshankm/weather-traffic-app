@@ -1,13 +1,11 @@
-import '../__mocks__/matchMedia.mock'
+import "../__mocks__/matchMedia.mock";
 import React from "react";
 import Slider from "react-slick";
 import { render } from "@testing-library/react";
-import Slide from './slide';
-
+import Slide from "./slide";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
 
 describe("Slide", () => {
   it("renders slide with images", () => {
