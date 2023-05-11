@@ -1,0 +1,27 @@
+/* src/App.css */
+
+body {
+  font-family: "Arial", sans-serif;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  cursor: pointer;
+  margin: 5px 0;
+}
+
+li:hover {
+  text-decoration: underline;
+}
+
+input[type="datetime-local"] {
+  margin-bottom: 15px;
+}
+
+h2 {
+  margin-bottom: 5px;
+}
