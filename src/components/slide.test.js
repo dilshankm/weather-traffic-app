@@ -1,6 +1,5 @@
 import "../__mocks__/matchMedia.mock";
 import React from "react";
-import Slider from "react-slick";
 import { render } from "@testing-library/react";
 import Slide from "./slide";
 

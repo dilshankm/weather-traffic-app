@@ -1,7 +1,6 @@
 import { render, fireEvent, screen } from "@testing-library/react";
 import LocationTable from "./locationTable";
 import { getNearestLocation } from "../helpers";
-import Search from "./locationSearch";
 import React from "react";
 import weather from "../mock-data/weatherForecast.json";
 import traffic from "../mock-data/trafficImages.json";

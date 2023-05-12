@@ -1,7 +1,5 @@
 import { render, fireEvent } from "@testing-library/react";
 import Filters from "./filters";
-import DatePicker from "./datePicker";
-import TimePickerComponent from "./timePicker";
 
 jest.mock("./DatePicker", () => (props) => (
   <div data-testid="datepicker">{props.children}</div>

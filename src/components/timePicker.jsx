@@ -1,14 +1,10 @@
-import React, { useState } from "react";
-import dayjs from "dayjs";
+import React from "react";
 import { TimePicker } from "@mui/x-date-pickers";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 const TimePickerComponent = ({ onTimeChange }) => {
-  const [time, setTime] = useState(dayjs(new Date()).format("HH:mm"));
-
   const handleChange = (data) => {
-    setTime(data);
     onTimeChange(data);
   };
 

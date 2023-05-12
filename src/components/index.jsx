@@ -6,7 +6,7 @@ import { useFetchTraficImages, useFetchWeatherForecast } from "../hooks/index";
 import LocationTable from "./locationTable";
 import Slide from "./slide";
 import Forecast from "./forecast";
-import { Snackbar, Alert } from "@mui/material";
+import { Alert } from "@mui/material";
 
 const Main = () => {
   const [date, setDate] = useState();
@@ -14,13 +14,9 @@ const Main = () => {
   const [dropState, setDropState] = useState();
   const [sliderState, setSliderState] = useState();
   const [weatherState, setWeatherState] = useState();
-  let { traficImages, loadingTraficImages, errorT } = useFetchTraficImages(
-    date,
-    time
-  );
+  let { traficImages, errorT } = useFetchTraficImages(date, time);
   const [disableClose, setDisableClose] = useState(null);
-  let { weatherForecast, loadingWeatherForecast, errorW } =
-    useFetchWeatherForecast(date, time);
+  let { weatherForecast, errorW } = useFetchWeatherForecast(date, time);
   const [selectedLocation, setSelectedLocation] = useState();
   const [currentLocation, setCurrentLocation] = useState();
 
@@ -64,11 +60,6 @@ const Main = () => {
     manageStateChange();
     setTime(time);
   };
-
-  const getForecast = () =>
-    weatherForecast?.items[0]?.forecasts?.filter(
-      (item) => item.area === currentLocation
-    );
 
   return (
     <>

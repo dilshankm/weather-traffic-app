@@ -1,23 +1,39 @@
-import { renderHook } from "@testing-library/react";
+import { renderHook, waitFor } from "@testing-library/react";
 import { getWeatherForecast } from "../services";
-import { useFetchWeatherForecast } from ".";
-import { wait } from "@testing-library/user-event/dist/utils";
-import weather from "../mock-data/weatherForecast.json";
+import useFetchWeatherForecast from "./useFetchWeatherForecast";
+import weatherData from "../mock-data/weatherForecast.json";
 
 jest.mock("../services");
 
 describe("useFetchWeatherForecast", () => {
-  it("fetches weather forecast", async () => {
-    const mockData = weather;
-    getWeatherForecast.mockResolvedValue(mockData);
+  beforeEach(() => {
+    jest.resetAllMocks();
+  });
 
+  it("fetches weather forecast", async () => {
+    getWeatherForecast.mockResolvedValue(weatherData);
     const { result } = renderHook(() =>
       useFetchWeatherForecast("2023-05-10", "08:00:00")
     );
+    expect(result.current.weatherForecast).toBeUndefined();
+    expect(result.current.errorW).toBeNull();
+    await waitFor(() =>
+      expect(result.current.weatherForecast).toEqual(weatherData)
+    );
+    expect(result.current.errorW).toBeNull();
+  });
 
-    await wait(() => expect(result.current.loadingWeatherForecast).toBe(false));
-    await wait(() => expect(result.current.weatherForecast).toBe(mockData));
-    expect(result.current.weatherForecast).toEqual(mockData);
-    expect(result.current.loadingWeatherForecast).toEqual(false);
+  it("handles error", async () => {
+    const mockError = new Error("Network error");
+    getWeatherForecast.mockRejectedValue(mockError);
+    const { result } = renderHook(() =>
+      useFetchWeatherForecast("2023-05-10", "08:00:00")
+    );
+    expect(result.current.weatherForecast).toBeUndefined();
+    expect(result.current.errorW).toBeNull();
+    await waitFor(() =>
+      expect(result.current.errorW).toEqual(mockError.message)
+    );
+    expect(result.current.weatherForecast).toBeUndefined();
   });
 });

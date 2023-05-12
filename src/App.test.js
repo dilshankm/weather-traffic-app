@@ -1,7 +1,6 @@
 import React from "react";
 import { render } from "@testing-library/react";
 import App from "./App";
-import Main from "./components";
 import "@testing-library/jest-dom";
 
 jest.mock("./components", () => () => <div data-testid="main-component" />);
