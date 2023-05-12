@@ -14,8 +14,12 @@ const LocationTable = ({
       latitude: item?.label_location?.latitude,
       longitude: item?.label_location?.longitude,
     }));
-    const nearestLocation = getNearestLocation(lat, long, location);
-    return nearestLocation?.name || "";
+    const matchedLocation = location?.find(
+      (item) => item.latitude === lat && item.longitude === long
+    );
+    return matchedLocation
+      ? matchedLocation.name
+      : getNearestLocation(lat, long, location)?.name || "";
   };
 
   const getOptions = () => {
