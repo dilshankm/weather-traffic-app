@@ -6,7 +6,8 @@ import { useFetchTraficImages, useFetchWeatherForecast } from "../hooks/index";
 import LocationTable from "./locationTable";
 import Slide from "./slide";
 import Forecast from "./forecast";
-import { Alert } from "@mui/material";
+import { setDateTime } from "../helpers";
+import ErrorAlert from "./errorAlert";
 
 const Main = () => {
   const [date, setDate] = useState();
@@ -19,6 +20,7 @@ const Main = () => {
   let { weatherForecast, errorW } = useFetchWeatherForecast(date, time);
   const [selectedLocation, setSelectedLocation] = useState();
   const [currentLocation, setCurrentLocation] = useState();
+  const [locationError, setLocationError] = useState(null);
 
   const onRowClickHandler = (data, name) => {
     name === undefined ? setWeatherState(false) : setWeatherState(true);
@@ -74,13 +76,15 @@ const Main = () => {
         sx={{ mt: 2 }}
       >
         <Grid item xs={4} md={4} lg={4}>
-          {dropState && traficImages && weatherForecast && (
+          {dropState && traficImages && weatherForecast && !locationError ? (
             <LocationTable
-              traficImages={traficImages}
-              weatherForecast={weatherForecast}
               onSelect={onRowClickHandler}
               disableClose={disableClose}
+              dateTime={setDateTime(date, time).format("YYYY-MM-DD[T]HH:mm:ss")}
+              setLocationError={setLocationError}
             />
+          ) : (
+            locationError && <ErrorAlert message={locationError} />
           )}
         </Grid>
       </Grid>
@@ -105,11 +109,7 @@ const Main = () => {
           )}
         </Grid>
         <Grid item xs={4} md={4} lg={4}>
-          {(errorW || errorT) && (
-            <Alert severity="error" variant="filled">
-              {errorW || errorT}
-            </Alert>
-          )}
+          {(errorW || errorT) && <ErrorAlert message={errorW || errorT} />}
         </Grid>
       </Grid>
     </>

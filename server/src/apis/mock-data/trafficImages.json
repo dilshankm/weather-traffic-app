@@ -1,0 +1,26 @@
+{
+  "items": [
+    {
+      "timestamp": "2023-05-09T09:19:45+08:00",
+      "cameras": [
+        {
+          "timestamp": "2023-05-09T09:17:05+08:00",
+          "image": "https://images.data.gov.sg/api/traffic-images/2023/05/816cb4c6-e875-4b55-a02a-a3eaef6f033b.jpg",
+          "location": {
+            "latitude": 1.29531332,
+            "longitude": 103.871146
+          },
+          "camera_id": "1001",
+          "image_metadata": {
+            "height": 240,
+            "width": 320,
+            "md5": "d437f7134135b0c1205984f9ef79600a"
+          }
+        }
+      ]
+    }
+  ],
+  "api_info": {
+    "status": "healthy"
+  }
+}

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { getWeatherForecast } from "../services";
 import { setDateTime } from "../helpers";
+import { isSuccessStatusCode } from "../helpers";
 
 const useFetchWeatherForecast = (date, time) => {
   const [weatherForecast, setWeatherForecast] = useState();
@@ -9,15 +10,16 @@ const useFetchWeatherForecast = (date, time) => {
   useEffect(() => {
     (async () => {
       if (!date || !time) return;
-      try {
         const dateTime = setDateTime(date, time).format(
           "YYYY-MM-DD[T]HH:mm:ss"
         );
         const data = await getWeatherForecast(dateTime);
-        setWeatherForecast(data);
-      } catch (error) {
-        setErrorW(error.message);
-      }
+        if(isSuccessStatusCode(data?.status)){
+          setWeatherForecast(data);
+        }
+        else{
+          setErrorW("Error in the service. Please contact Admin.");
+        }
     })();
   }, [date, time]);
 

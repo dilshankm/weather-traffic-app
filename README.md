@@ -1,44 +1,41 @@
 # Weather Traffic App
 
-This project is a sample application developed consuming singapore goverment external apis for viewing traffic images and weather forecast for a particular day and time and selecting a location.
+This project is a sample application developed consuming Singapore government external APIs for viewing traffic images and weather forecast for a particular day and time and selecting a location. It includes a frontend built with React and a backend built with NestJS.
 
 ## Requirements
 
 - Node.js
 - npm
 - Docker
+- Docker Compose
 
 ## Getting Started
 
-First, install dependencies:
+This project is made up of two sub-projects: a `client` and a `server`. Each can be installed and run separately, or they can be run together using Docker Compose.
 
-npm install
+### Client (React Application)
 
-Then, you can run the app in development mode:
+- Navigate to the `client` directory. (Root directory)
+- Install dependencies with `npm install`.
+- Run the application in development mode with `npm start`.
+- Create a production build of the application with `npm run build`.
 
-npm start
+### Server (NestJS Application)
 
-Or you can create a production build of the app:
+- Navigate to the `server` directory.
+- Install dependencies with `npm install`.
+- Run the application in development mode with `npm start`.
+- Create a production build of the application with `npm run build`.
 
-npm run build
+### Running the projects together with Docker Compose
 
-## Docker
+From the root directory of the project, you can use Docker Compose to build and start both services:
 
-### Building the Docker Image
+```bash
+docker-compose up --build
+```
 
-You can build a Docker image of the application by using the provided Dockerfile. To do so, navigate to the root directory of the project and run the following command:
-
-docker build -t weather-traffic-app .
-
-### Running the Docker Container
-
-After the image has been built, you can run a container from the image using the following command:
-
-docker run -p 3000:80 weather-traffic-app
-
-This command maps port 80 in the Docker container to port 3000 on your host machine.
-
-After the Docker container is running, you should be able to access the application in your web browser at http://localhost:3000.
+This will build and start both the React app and the NestJS server. The React app can be accessed at http://localhost:3000 and the NestJS server can be accessed at http://localhost:4000.
 
 ## Contributing
 

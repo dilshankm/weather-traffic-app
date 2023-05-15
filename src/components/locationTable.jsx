@@ -1,60 +1,41 @@
 import * as React from "react";
-import { getNearestLocation } from "../helpers";
+import { useState, useEffect } from "react";
 import Search from "./locationSearch";
+import { getLocationMap } from "../services";
+import { isSuccessStatusCode } from "../helpers";
 
 const LocationTable = ({
-  weatherForecast,
-  traficImages,
   onSelect,
   disableClose,
+  dateTime,
+  setLocationError,
 }) => {
-  const getTraficLocation = (lat, long) => {
-    const location = weatherForecast?.area_metadata?.map((item) => ({
-      name: item?.name,
-      latitude: item?.label_location?.latitude,
-      longitude: item?.label_location?.longitude,
-    }));
-    const matchedLocation = location?.find(
-      (item) => item.latitude === lat && item.longitude === long
-    );
-    return matchedLocation
-      ? matchedLocation.name
-      : getNearestLocation(lat, long, location)?.name || "";
-  };
+  const [options, setOptions] = useState(null);
 
-  const getOptions = () => {
-    const options = traficImages?.items[0]?.cameras?.map((item, index) => {
-      const location = getTraficLocation(
-        item?.location?.latitude,
-        item?.location?.longitude
-      );
-      return { location_name: location, directions: item };
-    });
-
-    const map1 = new Map();
-    options.forEach((element) => {
-      if (map1.get(element.location_name)) {
-        map1.set(element.location_name, [
-          ...map1.get(element.location_name),
-          element.directions,
-        ]);
+  useEffect(() => {
+    const fetchLocationMap = async () => {
+      const locationMap = await getLocationMap(dateTime);
+      if (isSuccessStatusCode(locationMap?.status)) {
+        setOptions(locationMap);
       } else {
-        map1.set(element.location_name, [element.directions]);
+        setLocationError("Error in the service. Please contact Admin.");
       }
-    });
-    return map1;
+    };
+
+    fetchLocationMap();
+  }, [dateTime, setLocationError]);
+
+  const handleSelect = (event) => {
+    const selectedLocationName = event.target.outerText;
+    const selectedDirections = options[selectedLocationName];
+    onSelect(selectedDirections, selectedLocationName);
   };
 
   return (
     <>
       <Search
-        data={Array.from(getOptions().keys())}
-        onSelect={(event) =>
-          onSelect(
-            getOptions().get(event.target.outerText),
-            event.target.outerText
-          )
-        }
+        data={options ? Object.keys(options) : []}
+        onSelect={handleSelect}
         disableClose={disableClose}
       />
     </>

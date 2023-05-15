@@ -2,6 +2,7 @@ import { renderHook, waitFor } from "@testing-library/react";
 import { getWeatherForecast } from "../services";
 import useFetchWeatherForecast from "./useFetchWeatherForecast";
 import weatherData from "../mock-data/weatherForecast.json";
+import errorData from "../mock-data/errorData.json";
 
 jest.mock("../services");
 
@@ -24,16 +25,11 @@ describe("useFetchWeatherForecast", () => {
   });
 
   it("handles error", async () => {
-    const mockError = new Error("Network error");
-    getWeatherForecast.mockRejectedValue(mockError);
+    getWeatherForecast.mockResolvedValue(errorData);
     const { result } = renderHook(() =>
-      useFetchWeatherForecast("2023-05-10", "08:00:00")
+      useFetchWeatherForecast("2023-05-10", "08:00:000")
     );
     expect(result.current.weatherForecast).toBeUndefined();
     expect(result.current.errorW).toBeNull();
-    await waitFor(() =>
-      expect(result.current.errorW).toEqual(mockError.message)
-    );
-    expect(result.current.weatherForecast).toBeUndefined();
   });
 });

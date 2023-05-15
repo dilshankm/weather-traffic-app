@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { getTraficImages } from "../services";
 import { setDateTime } from "../helpers";
+import { isSuccessStatusCode } from "../helpers";
 
 const useFetchTraficImages = (date, time) => {
   const [traficImages, setTraficImages] = useState();
@@ -9,14 +10,13 @@ const useFetchTraficImages = (date, time) => {
   useEffect(() => {
     (async () => {
       if (!date || !time) return;
-      try {
-        const dateTime = setDateTime(date, time).format(
-          "YYYY-MM-DD[T]HH:mm:ss"
-        );
-        const data = await getTraficImages(dateTime);
+      const dateTime = setDateTime(date, time).format("YYYY-MM-DD[T]HH:mm:ss");
+      const data = await getTraficImages(dateTime);
+      if(isSuccessStatusCode(data?.status)){
         setTraficImages(data);
-      } catch (error) {
-        setErrorT(error.message);
+      }
+      else{
+        setErrorT("Error in the service. Please contact Admin.");
       }
     })();
   }, [date, time]);

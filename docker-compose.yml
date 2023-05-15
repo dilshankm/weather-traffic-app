@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  client:
+    build: . # path to Dockerfile of React app
+    ports:
+      - "3000:3000" # adjust to your React app's port
+    depends_on:
+      - server
+  server:
+    build: ./server # path to Dockerfile of NestJS app
+    ports:
+      - "4000:4000" # adjust to your NestJS app's port

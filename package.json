@@ -28,9 +28,9 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "jest",
+    "test": "jest src/*",
     "eject": "react-scripts eject"
-  },
+  },  
   "eslintConfig": {
     "extends": [
       "react-app",
